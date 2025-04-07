@@ -1,55 +1,42 @@
-text = "Hello world"
-name = "Yana"
-last_name = "Naumovych"
-age = 16
-print(text)
-print(name,last_name)
-print(age)
-print(type(name))
-print(type(last_name))
-print(type(age))
+class Yana:
+    def __init__(self, name="Yana", surname="Naumovich", birth_year=2008):
+        self.name = name
+        self.surname = surname
+        self.birth_year = birth_year
+
+    def calculate_course(self):
+        if self.birth_year is None:
+            return "Рік народження не вказано"
+        current_year = 2025
+        age = current_year - self.birth_year
+        course = age - 17 + 1
+        if course < 1:
+            return "Ще не студент"
+        elif course > 4:
+            return "Закінчив бакалаврат"
+        return f"{course} курс"
+
+    def full_name_list(self):
+        return [self.name, self.surname]
 
 
-count_int = 0
-count_str = 0
-count_float = 0
-count_set = 0
-count_tuple = 0
-count_bool = 0
-count_list = 0
-count_notnull = []
-max_value = 0
-lst_notnull = []
-lst_count_types = [count_list, count_bool, count_set, count_float, count_tuple, count_str, count_int]
-lst = [name, last_name, age]
-lst_name_type = [int, str, str, int, str, str]
-for item in lst:
-    if type(item) == int:
-        lst_count_types[-1] +=1
-    elif type(item) == str:
-        lst_count_types[-2] +=1
-    elif type(item) == tuple:
-        lst_count_types[-3] +=1
-    elif type(item) == float:
-        lst_count_types[-4] +=1
-    elif type(item) == set:
-        lst_count_types[-5] +=1
-    elif type(item) == bool:
-        lst_count_types[-6] +=1
-    elif type(item) == list:
-        lst_count_types[-7] +=1
-for item in lst_count_types:
-    if item !=0:
-        lst_notnull.append(item)
-    if len(lst_notnull) == 1:
-        print('Good')
-    else:
-        if item > max_value:
-            max_value = item
+class YanaExtended(Yana):
+    def __init__(self, name="Yana", surname="Naumovich", birth_year=2008,
+                 city=None, college=None, specialty=None):
+        super().__init__(name, surname, birth_year)
+        self.city = city
+        self.college = college
+        self.__specialty = specialty  # private атрибут
 
+    def _greet_user(self):  # protected метод
+        return f"Вітаю! Я {self.name} з міста {self.city}, навчаюся в {self.college}."
 
-inn = lst_count_types.index(max_value)
-print(lst_name_type[inn])
-for item in lst:
-    if type(item) !=lst_name_type[inn]:
-        lst.remove(item)
+    def __calculate_study_years(self):  # private метод
+        if self.birth_year is None:
+            return None
+        current_year = 2025
+        return current_year - self.birth_year
+
+    def get_study_years(self):  # відкритий метод для доступу до приватного
+        years = self.__calculate_study_years()
+        return f"Я навчаюся вже {years - 17 + 1} років" if years else "Немає даних"
