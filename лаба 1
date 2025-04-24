@@ -1,0 +1,23 @@
+from datetime import datetime
+
+class MyName:
+    def init(self, name=None, second_name=None, birth_yr=None):
+        self.name = name
+        self.second_name = second_name
+        self.birth_yr = birth_yr
+
+    def calculate_course(self):
+        if self.birth_yr is None:
+            return None
+        this_year = datetime.now().year
+        age = this_year - self.birth_yr
+        course = age - 15 #поступають в 15 років
+        return max(course, 1) #курс не може бути 0
+
+    def name_list(self):
+        return [self.name, self.second_name]
+
+
+obj = MyName("Яна", "Наумович", 2008)
+print(obj.name_list())
+print(obj.calculate_course())
