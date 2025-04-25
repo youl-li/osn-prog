@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class MyName:
-    def init(self, name=None, second_name=None, birth_yr=None):
+    def __init__(self, name=None, second_name=None, birth_yr=None):
         self.name = name
         self.second_name = second_name
         self.birth_yr = birth_yr
